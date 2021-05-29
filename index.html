@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Space Invaders</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      background-color: black;
+      color: white;
+      font-family: 'Lucida Console', 'Segoe UI', Tahoma, Geneva, Verdana,
+        sans-serif;
+    "
+  >
+    <div style="padding: 20px 0">
+      <span style="padding: 0 20px">SCORE:<span id="score">0000</span></span>
+      <span style="padding: 0 20px">LIVES:<span id="lives">3</span></span>
+      <span style="padding: 0 20px">WAVE:<span id="sheet">1</span></span>
+      <span style="padding: 0 20px"
+        >HI SCORE:<span id="hiscore">0000</span></span
+      >
+    </div>
+
+    <canvas
+      height="500"
+      width="900"
+      style="border-bottom: chartreuse 1px solid"
+    ></canvas>
+
+    <div style="padding: 20px 0">
+      <span style="padding: 0 15px">Z=LEFT</span>
+      <span style="padding: 0 15px">X=RIGHT</span>
+      <span style="padding: 0 15px">RETURN=FIRE</span>
+      <span style="padding: 0 15px">OR USE GAMEPAD</span>
+      <span style="padding: 0 15px">P=PAUSE</span>
+      <span style="padding: 0 15px">SPACE=PLAY AGAIN</span>
+      <span style="padding: 0 15px; display: none"
+        >DEBUG:<span id="dbg">0</span></span
+      >
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
