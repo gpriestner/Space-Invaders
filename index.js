@@ -58,7 +58,7 @@ class Graphic {
   static laserExplosion1 = Graphic.image("./laserexplode1.png");
   static laserExplosion2 = Graphic.image("./laserexplode2.png");
   static laserBeamExplode = Graphic.image("./laserexplode.png");
-  static alienExplosion = Graphic.image("./alienexplode.png");
+  static alienExplosion = Graphic.image("./AlienExplode.png");
   static bombExplosion = Graphic.image("./BombExplode.png");
   static bombFrame = [
     [
