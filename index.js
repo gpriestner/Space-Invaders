@@ -12,7 +12,7 @@ class Control {
 }
 class Sound {
   static volume = 2;
-  static maxVolume = 20;
+  static maxVolume = 50;
   static soundOn = true;
   static soundScale = 1 / Sound.maxVolume;
   static toggleSound() {
@@ -153,8 +153,8 @@ class KeyInput {
   static get isFire() {
     return (
       (KeyInput.isFireKeyDown || KeyInput.isFireDown) &&
-      KeyInput.isLaserReloaded &&
-      !game.laserBeam.isFiring
+      KeyInput.isLaserReloaded //&&
+      //!game.laserBeam.isFiring
     );
     /*
     return (
@@ -441,21 +441,21 @@ class Invader {
       return {
         x: this.x + 8,
         y: this.y + 5,
-        width: 22,
-        height: 20,
+        width: 26, // 24
+        height: 20, // 20
       };
     if (this.size == 2)
       return {
         x: this.x + 6,
         y: this.y + 5,
-        width: 30,
+        width: 30, // 30
         height: 20,
       };
     if (this.size == 3)
       return {
         x: this.x + 4,
         y: this.y + 2,
-        width: 32,
+        width: 32, // 32
         height: 27,
       };
   }
@@ -470,7 +470,7 @@ class Invader {
   isPointInsideArea(point, area) {
     return (
       point.x >= area.x &&
-      point.x <= area.x + area.height &&
+      point.x <= area.x + area.width &&
       point.y >= area.y &&
       point.y <= area.y + area.height
     );
@@ -899,9 +899,12 @@ class LaserBeam {
         this.selfDestruct = false;
       }
     } else if (this.isFiring) {
-      for (let i = 0; i < 4; ++i) {
+      const verticalMovement = 21;
+      const verticalSteps = 3; // 4
+      const verticalIncrements = verticalMovement / verticalSteps;
+      for (let i = 0; i < verticalSteps; ++i) {
         // laser beam currently firing
-        this.y -= 5; // 20
+        this.y -= verticalIncrements; // 20
         if (this.y <= 10) {
           // laser beam has gone off top of screen
           this.selfDestruct = true;
@@ -915,7 +918,7 @@ class LaserBeam {
           // laser beam hit a bomb and explodes
           this.selfDestruct = true;
         } else if (game.shields.isHit(this)) {
-          // laser beam hit a shield and disappears
+          // laser beam hit a shield and disappears immediately
           this.isFiring = false;
           break;
         }
