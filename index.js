@@ -5,6 +5,7 @@ class Control {
   static sheetControl = document.getElementById("sheet");
   static hiscoreControl = document.getElementById("hiscore");
   static debugControl = document.getElementById("dbg");
+  static gameOverControl = document.getElementById("gameover");
   static graphics = Control.canvas.getContext("2d");
   static #Control = (() => {
     Control.graphics.font = "20px Lucida Console";
@@ -1179,6 +1180,7 @@ class Game {
     this.isResetting = false;
     KeyInput.isPaused = false;
     this.ufo = new Ufo();
+    Control.gameOverControl.style.display = "none";
   }
   addScore(points) {
     if (this.#score < 1500 && this.#score + points >= 1500) this.addLife();
@@ -1210,7 +1212,9 @@ class Game {
     this.#boardLevel = level;
     Control.sheetControl.innerText = this.#boardLevel;
   }
-  get over() {
+  get isGameOver() {
+    if (this.gameOverCount == 60)
+      Control.gameOverControl.style.display = "block";
     return this.gameOverCount > 60;
   }
   get isGameFinishing() {
@@ -1293,7 +1297,7 @@ class Game {
   step(timestamp, override) {
     if (KeyInput.isGamePadConnected) this.getGamePadInfo();
 
-    if (!this.over && (!KeyInput.isPaused || override)) {
+    if (!this.isGameOver && (!KeyInput.isPaused || override)) {
       const elapsed = timestamp - this.previousTimestamp;
       if (elapsed > 30) {
         this.update(timestamp);
